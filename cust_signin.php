@@ -25,6 +25,7 @@
     <div class="row  justify-content-center">
         <h1 class="pb-3">Unos podataka o računu</h1>
     </div>
+    <div>
     <form name="unos_gosta" method="POST" action="bill_data_preview.php">
         <div class="row justify-content-around text-center ">
             <div class="col-6 border shadow editor">
@@ -36,9 +37,11 @@
                 <input type="radio" name="pet" value="1">
                 <label for="0" >Ne</label>
                 <input type="radio" name="pet" value="0" >
+                <p>Količina novca za ljubimca:</p>
+                <input type="number" name="pet_price" value="7">
                 <hr>
                 <p>Iznos akontacije:</p>
-                <input type="text" name="akontacija">
+                <input type="number" name="akontacija">
                 <hr>
                 <p>Jedinicna cijena:</p>
                 <input type="number" name="unit_price">
