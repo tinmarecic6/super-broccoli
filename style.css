@@ -1,6 +1,6 @@
 body{
     background: rgb(154,177,235);
-    background: radial-gradient(circle, rgba(225,234,245,1) 0%, rgba(154,177,235,1) 100%);
+    background: radial-gradient(circle, rgba(154,177,235,1) 0%, rgba(225,234,245,1) 100%);
     font-family: 'Roboto', sans-serif;
 }
 .editor{
@@ -14,3 +14,16 @@ table tr td:last-child:hover{
 table tr td a:link {
     text-decoration:none;
 }
+#login .container #login-row #login-column #login-box {
+    margin-top: 120px;
+    max-width: 600px;
+    height: 320px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }

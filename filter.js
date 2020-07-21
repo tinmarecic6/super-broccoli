@@ -6,3 +6,13 @@ $(document).ready(function(){
     });
   });
 });
+
+$(document).ready(function(){
+  $("input[name='pet']").click(function() {
+    if ($("#petYes").is(":checked")) {
+      $("#pet_price").show();
+    } else {
+      $("#pet_price").hide();
+    }
+  });
+});
