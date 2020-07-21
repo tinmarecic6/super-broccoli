@@ -97,16 +97,4 @@ class MojRacun extends FPDF{
 
     
 }
-/* $racun=new MojRacun();
-$racun->id = 2;
-$racun->SetTitle('Racun 2/2020',false);
-$racun->AddPage('P','A4',0);
-$racun->userInfo('Marko Petak','10.07.2020','15.07.2020');
-$racun->headerTable();
-if(isset($pet)){
-    $racun->tableContent('Ljubimac','0','4','7','240');
-}
-$racun->tableContent('Najam apartmana','300','5','301','1204.97','1504.97');
-$racun->billInfo('Gotovina',date('d.m.Y'));
-$racun->Output('I',iso88592('Marko Petak').date('d-m-Y').'.pdf',false); */
 ?>

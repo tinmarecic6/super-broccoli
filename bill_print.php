@@ -32,6 +32,8 @@ $total_pay = $noNights*$unit_price;
 $to_pay = $total_pay-$akontacija;
 $racun->tableContent('Najam apartmana',$akontacija,$noNights,$unit_price,$to_pay,$total_pay);
 $racun->totalPrice($total_pay,$petCost);
-$racun->billInfo('Gotovina',date('d.m.Y'));
+$datum_racuna = new Datetime($result['date_of_bill']);
+$datum_racuna = $datum_racuna->format('d.m.Y');
+$racun->billInfo('Gotovina',$datum_racuna);
 $racun->Output('I',iso88592($result['guest_name']).date('d-m-Y').'.pdf',false);
 ?>
