@@ -62,7 +62,7 @@ class MojRacun extends FPDF{
     }
     public function headerTable(){
         $this->SetFont('Roboto-thin','',11);
-        $this->Cell(40,10,iso88592('*Sve cijene su izražene u kunama'),0,1,'L',false);
+        $this->Cell(40,10,iso88592('*Sve cijene su izražene u eurima'),0,1,'L',false);
         $this->SetFont('Roboto-Light','',11);
         $this->SetFillColor(153, 187, 255);
         $this->Cell(32,10,'Vrsta usluge ',1,0,'C',true);
