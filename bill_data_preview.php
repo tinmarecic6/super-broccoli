@@ -1,64 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="filter.js" ></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="datepicker/moment.js"></script>
-	  <script type="text/javascript" src="datepicker/daterangepicker.js"></script>
-	  <link rel="stylesheet" type="text/css" href="datepicker/daterangepicker-bs3.css" />
-      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-      <link href="style.css" type="text/css"  rel="stylesheet">
-	  <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <title>Provjera</title>
+	<?php include 'libraries.php'; ?>
+	<title>Provjera</title>
 </head>
+
 <body>
-    <?php
-    require('bill.php');
-    require('db.php');
-    $conn = db();
-    $cust_name = $_POST['cust_name'];
-    $hasPet = $_POST['pet'];
-    $pet_cost = $_POST['pet_price'];
-    $akontacija = $_POST['akontacija'];
-    $unit_price = $_POST['unit_price'];
-    $reservation = explode(' - ',$_POST['reservation']);
-    $start_date = new DateTime($reservation[0]);
-    $end_date = new DateTime($reservation[1]);
-    $noNights = $end_date->diff($start_date)->format("%d");
-    $start_date = $start_date->format('Y-m-d');
-    $end_date = $end_date->format('Y-m-d');
-    $sql_unos = 'INSERT INTO `bill`(`id`, `guest_name`, `has_pet`, `pet_price`, `accontation`, `unit_price`, `date_from`, `date_to`, `date_of_bill`) VALUES
-    (NULL,"'.$cust_name.'",'.$hasPet.','.$pet_cost.','.$akontacija.','.$unit_price.',"'.$start_date.'","'.$end_date.'",now());';
-    $conn->query($sql_unos);
-    /* echo $sql_unos;
-    echo mb_detect_encoding($cust_name); */
-    $id_racuna = $conn->insert_id;
-    ?>
-    <div class="container-fluid">
-        <h3>Podaci su uneseni!</h3>
-        <p>Unesene informacije o gostu:</p>
-        <form name="provjera" method="POST" action="data_write.php">
-            <ul>
-                <li>Ime gosta: <b><?php echo $cust_name;?></b></li>
-                <li>Ljubimac: <?php if($hasPet =='1'){ echo 'Da';}else{echo 'Ne';};?></li>
-                <li>Ljubimac po cijeni: <?php echo $pet_cost;?></li>
-                <li>Iznos uplaćene akontacije:  <?php echo $akontacija;?></li>
-                <li>Apartman je izdan po cijeni: <?php echo $unit_price;?></li>
-                <li><?php echo 'Datum dolaska: '.$reservation[0]?></li>
-                <li><?php echo 'Datum odlaska: '.$reservation[1];?></li>
-            </ul>
-        </form>
-        <?php 
-        echo '<a href = "bill_print.php?id_bill='.$id_racuna.'" target="_blank">PDF</a>'?>
-        <a href = "guest_evidention.php">Povratak</a>
-    </div>
+	<?php
+	require('bill.php');
+	require('db.php');
+	$conn = db();
+	$cust_name = $_POST['cust_name'];
+	$hasPet = $_POST['pet'];
+	$pet_cost = $_POST['pet_price'];
+	$akontacija = $_POST['akontacija'];
+	$unit_price = $_POST['unit_price'];
+	$reservation = explode(' - ', $_POST['reservation']);
+	$start_date = new DateTime($reservation[0]);
+	$end_date = new DateTime($reservation[1]);
+	$noNights = $end_date->diff($start_date)->format("%d");
+	$start_date = $start_date->format('Y-m-d');
+	$end_date = $end_date->format('Y-m-d');
+	$sql_unos = 'INSERT INTO `bill`(`id`, `guest_name`, `has_pet`, `pet_price`, `accontation`, `unit_price`, `date_from`, `date_to`, `date_of_bill`) VALUES
+    (NULL,"' . $cust_name . '",' . $hasPet . ',' . $pet_cost . ',' . $akontacija . ',' . $unit_price . ',"' . $start_date . '","' . $end_date . '",now());';
+	// $conn->query($sql_unos);
+	$id_racuna = $conn->insert_id;
+	?>
+	<div class=" border container-fluid d-flex flex-column justify-content-center align-items-center">
+		<h3 class="border border-danger">Podaci su uneseni!</h3>
+		<p>Unesene informacije o gostu:</p>
+		<form name="provjera" method="POST" action="data_write.php" class="border border-primary">
+			<ul>
+				<li>Ime gosta: <b><?php echo $cust_name; ?></b></li>
+				<li>Ljubimac: <?php if ($hasPet == '1') {
+									echo 'Da';
+								} else {
+									echo 'Ne';
+								}; ?></li>
+				<li>Ljubimac po cijeni: <?php echo $pet_cost; ?></li>
+				<li>Iznos uplaćene akontacije: <?php echo $akontacija; ?></li>
+				<li>Apartman je izdan po cijeni: <?php echo $unit_price; ?></li>
+				<li><?php echo 'Datum dolaska: ' . $reservation[0] ?></li>
+				<li><?php echo 'Datum odlaska: ' . $reservation[1]; ?></li>
+			</ul>
+		</form>
+		<?php
+		echo '<a href = "bill_print.php?id_bill=' . $id_racuna . '" target="_blank">PDF</a>' ?>
+		<a href="guest_evidention.php">Povratak</a>
+	</div>
 </body>
+
 </html>

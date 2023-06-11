@@ -21,9 +21,22 @@ table tr td a:link {
     border: 1px solid #9C9C9C;
     background-color: #EAEAEA;
   }
-  #login .container #login-row #login-column #login-box #login-form {
+#login .container #login-row #login-column #login-box #login-form {
     padding: 20px;
   }
-  #login .container #login-row #login-column #login-box #login-form #register-link {
+#login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -85px;
   }
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #4CAF50;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+	font-weight: bold;
+}
+
+.button:hover {
+	background-color: #45a049;
+}
