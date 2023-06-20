@@ -1,22 +1,63 @@
 import pyodbc
+import psycopg2
+"""
+Hosted by: ElephantSQL 
+"""
 
-password = "Jl7HF9t0W5XgmxE"
-host = "sql206.epizy.com"
-username = "epiz_26370711"
-db_name = "epiz_26370711_app_vlasta"
-driver = "{ODBC Driver 17 for SQL Server}"
+class Database:
+    def __init__(self, app):
+        self.app = app
 
-connection_string = f"DRIVER={driver};SERVER={host};DATABASE={db_name};UID={username};PWD={password}"
+    def connect(self):
+        try:
+            conn = psycopg2.connect(
+                host=self.app.config['PG_HOST'],
+                port=self.app.config['PG_PORT'],
+                user=self.app.config['PG_USER'],
+                password=self.app.config['PG_PASSWORD'],
+                database=self.app.config['PG_DATABASE']
+            )
+            print("Connected to the PostgreSQL database.")
+            return conn
+        except (Exception, psycopg2.Error) as error:
+            print("Error while connecting to PostgreSQL database:", error)
 
-def create_connection()->object:
-    conn = pyodbc.connect(connstring=connection_string)
-    return conn
 
-def close_connection(conn):
-    conn.close()
-    
-def query(conn,query_string) -> dict:
-    cursor = conn.cursor()
-    cursor.execute(query_string)
-    results = cursor.fetchall()
-    return results
+    def execute_query(self, query):
+        conn = self.connect()
+        cur = conn.cursor()
+        try:
+            cur.execute(query)
+            result = cur.fetchall()
+            return result
+        except (Exception, psycopg2.Error) as error:
+            print("Error executing query:", error)
+        finally:
+            cur.close()
+            conn.close()
+
+    def insert_data(self, query):
+        conn = self.connect()
+        cur = conn.cursor()
+        try:
+            cur.execute(query)
+            conn.commit()
+            print("Data inserted successfully.")
+        except (Exception, psycopg2.Error) as error:
+            print("Error inserting data:", error)
+        finally:
+            cur.close()
+            conn.close()
+
+    def delete_data(self, query):
+        conn = self.connect()
+        cur = conn.cursor()
+        try:
+            cur.execute(query)
+            conn.commit()
+            print("Data deleted successfully.")
+        except (Exception, psycopg2.Error) as error:
+            print("Error deleting data:", error)
+        finally:
+            cur.close()
+            conn.close()
