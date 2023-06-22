@@ -1,0 +1,5 @@
+reportlab
+flask
+hashlib
+psycopg2
+datetime

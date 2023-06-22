@@ -66,10 +66,26 @@
                 <th scope="col">Datum odlaska</th>
                 <th scope="col">Nadnevak</th>
                 <th scope="col">Printanje</th>
+				<th scope="col">Brisanje</th>
                 </tr>
             </thead> 
             <tbody id="guestTable">
-           
+				{% for result in results%}
+				<tr>
+					<td scope="row">{{result[0]}}</td> <!--id-->
+					<td>{{ result[1] }}</td> <!--name-->
+					<td>{{ result[2] }}</td> <!--has_pet-->
+					<td>{{ result[3] }}</td> <!--pet_price-->
+					<td>{{ result[4] }}</td> <!--accontation-->
+					<td>{{ result[5] }}</td> <!--unit_price-->
+					<td>{{ result[6] }}</td> <!--bill_price-->
+					<td>{{ result[7] }}</td> <!--date_from-->
+					<td>{{ result[8] }}</td> <!--date_to-->
+					<td>{{ result[8] }}</td> <!--bill_date-->
+					<td><a href="/print?id={{result[0]}}">Printanje</a></td> <!--print-->
+					<td><a href="/delete?id={{result[0]}}">Brisanje</a></td> <!--print-->
+				</tr>
+				{%endfor%}
             </tbody>
             </table>
             </div>
